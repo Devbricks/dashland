@@ -19,17 +19,24 @@ class Game extends Phaser.Scene {
     // add Sky background sprit
     this.add.image(400, 300, 'sky');
 
-    // Create ground platforms
-    // this.platforms = this.physics.add.staticGroup();
-
     // Create Player
     this.player = this.physics.add.sprite(100, 250, 'ship');
-    // this.player.body.setGravityY(200);
-    // this.player.setBounce(0);
     this.player.setCollideWorldBounds(true);
 
+    // Create ball
     this.ball = this.physics.add.sprite(100, 240, 'ball');
+    this.ball.setCollideWorldBounds(true);
+    this.ball.setBounce(1);
+    this.ball.setCircle(25);
 
+    // this.ball.setGravityY(100);
+    this.ball.setVelocityX(250);
+    this.ball.setVelocityY(250);
+    console.log(this.ball);
+    this.physics.add.collider(this.ball, this.player, () => {
+      // this.ball.setVelocityX(-this.ball.body.velocity.x);
+      // this.ball.setVelocityY(-this.ball.body.velocity.y);
+    });
 
     // Create player animation
     // this.anims.create({
