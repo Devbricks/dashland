@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "build": "parcel build src/index.html",
-    "format": "eslint --fix \"src/**/*.js\"",
     "lint": "eslint \"src/**/*.js\"",
     "start": "parcel ./src/index.html --public-url /"
   },
@@ -17,6 +16,7 @@
     "parcel-bundler": "^1.10.3"
   },
   "dependencies": {
+    "babel-eslint": "^10.0.1",
     "phaser": "^3.15.1"
   }
 }
