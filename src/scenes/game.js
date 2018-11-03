@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+// Assets
 import sky from '../assets/sky.png';
 import ship from '../assets/ship.png';
 import ball from '../assets/ball.png';
