@@ -23,6 +23,7 @@ class Game extends Phaser.Scene {
     // Create Player
     this.player = this.physics.add.sprite(100, 250, 'ship');
     this.player.setCollideWorldBounds(true);
+    this.player.setImmovable(true);
 
     // Create ball
     this.ball = this.physics.add.sprite(100, 240, 'ball');
