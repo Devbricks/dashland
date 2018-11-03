@@ -1,5 +1,12 @@
 import Phaser from 'phaser';
 
+// Styles
+import './styles/global.css';
+import './styles/scene.css';
+
+// Utils
+import canvasResizer from './utils/resizer';
+
 import constants from './config/constants';
 import GameScene from './scenes/game';
 
@@ -7,6 +14,7 @@ const config = {
   type: Phaser.AUTO,
   width: constants.WIDTH,
   height: constants.HEIGHT,
+  canvas: document.querySelector('#dashland-canvas'),
   physics: {
     default: 'arcade',
     arcade: {
@@ -19,8 +27,14 @@ const config = {
   scene: [GameScene],
 };
 
-// eslint-disable-next-line no-new
-new Phaser.Game(config);
+const game = new Phaser.Game(config);
+
+// fullscreen mode
+setTimeout(() => {
+  const resizer = canvasResizer(game);
+  resizer();
+  window.addEventListener('resize', resizer, false);
+}, 0);
 
 if (module.hot) {
   module.hot.accept(() => {});
