@@ -1,9 +1,16 @@
 module.exports = {
-  env: { browser: true },
-  extends: "airbnb-base",
+  env: {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  parser: "babel-eslint",
+  extends: ["airbnb-base"],
   rules: {
-    "linebreak-style": ["error", "windows"],
-    "linebreak-style": ["error", "unix"]
+    "import/no-extraneous-dependencies": "off",
+    "no-underscore-dangle": "off",
+    "no-return-assign": ["error", "except-parens"],
   },
   plugins: ["import"]
 };
