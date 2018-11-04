@@ -3,14 +3,25 @@ import Phaser from 'phaser';
 // Config
 import config from './config/config';
 
+// Scenes
+import GameScene from './scenes/game';
+
 // Styles
 import './styles/global.css';
 // import './styles/scene.css';
 
 // Utils
-import canvasResizer from './utils/resizer';
+// import canvasResizer from './utils/resizer';
 
-const game = new Phaser.Game(config);
+class DashLand extends Phaser.Game {
+  constructor () {
+    super(config);
+    this.scene.add('Game', GameScene);
+    this.scene.start('Game');
+  }
+}
+
+const game = new DashLand(config);
 
 // fullscreen mode
 // setTimeout(() => {

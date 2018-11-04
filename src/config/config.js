@@ -3,7 +3,6 @@ import Phaser from 'phaser';
 // Plugins
 import 'phaser-plugin-game-scale';
 
-import GameScene from '../scenes/game';
 import constants from './constants';
 
 const config = {
@@ -21,7 +20,6 @@ const config = {
       debug: false,
     },
   },
-  scene: [GameScene],
   plugins: {
     global: [{
       key: 'GameScalePlugin',
