@@ -11,6 +11,14 @@ class Game extends Phaser.Scene {
     super({ key: 'Game' });
   }
 
+  centerX() {
+    return this.sys.game.config.width / 2;
+  }
+
+  centerY() {
+    return this.sys.game.config.height / 2;
+  }
+
   preload() {
     this.load.image('sky', sky);
     this.load.image('ship', ship);
@@ -23,18 +31,26 @@ class Game extends Phaser.Scene {
     this.add.image(400, 300, 'sky');
 
     // Create Player
-    this.player = this.physics.add.sprite(100, 250, 'ship');
+    console.log(this);
+    this.player = this.physics.add.sprite(100, this.centerY(), 'ship');
     this.player.setCollideWorldBounds(true);
     this.player.setImmovable(true);
 
     // Create ball
-    this.ball = this.physics.add.sprite(100, 240, 'ball');
+    this.ball = this.physics.add.sprite(250, 240, 'ball');
+    // this.ball.body.setSize(10, 10);
+
     this.ball.setCollideWorldBounds(true);
+    this.ball.body.setAllowGravity(false);
+
+    // this.ball.setAcceleration(200, 200);
+    // this.ball.body.setDrag(5);
+
     this.ball.setBounce(1);
     this.ball.setCircle(25);
 
-    this.ball.setVelocityX(250);
-    this.ball.setVelocityY(250);
+    this.ball.setVelocityX(200);
+    this.ball.setVelocityY(200);
 
     this.bounceSound = this.sound.add('bounceSound');
 
