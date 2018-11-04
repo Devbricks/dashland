@@ -27,18 +27,21 @@ class Game extends Phaser.Scene {
   }
 
   create() {
+    this.physics.world.checkCollision.left = false;
     // add Sky background sprit
     this.add.image(400, 300, 'sky');
 
     // Create Player
-    console.log(this);
-    this.player = this.physics.add.sprite(100, this.centerY(), 'ship');
+    this.player = this.physics.add.sprite(50, this.centerY(), 'ship');
+    this.player.setScale(0.3, 0.3);
     this.player.setCollideWorldBounds(true);
     this.player.setImmovable(true);
 
     // Create ball
     this.ball = this.physics.add.sprite(250, 240, 'ball');
     // this.ball.body.setSize(10, 10);
+    this.ball.setScale(0.4, 0.4);
+
 
     this.ball.setCollideWorldBounds(true);
     this.ball.body.setAllowGravity(false);
@@ -49,13 +52,14 @@ class Game extends Phaser.Scene {
     this.ball.setBounce(1);
     this.ball.setCircle(25);
 
-    this.ball.setVelocityX(200);
-    this.ball.setVelocityY(200);
+    this.ball.setVelocityX(300);
+    this.ball.setVelocityY(300);
 
     this.bounceSound = this.sound.add('bounceSound');
 
     this.physics.add.collider(this.ball, this.player, () => {
-      this.bounceSound.play();
+      // this.bounceSound.play();
+      this.ball.setVelocity(this.ball.body.velocity.x + 10, this.ball.body.velocity.y + 10);
     });
 
     // Create player animation
