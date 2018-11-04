@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import sky from '../assets/sky.png';
 import ship from '../assets/ship.png';
 import ball from '../assets/ball.png';
+import bounceSound from '../assets/crossbow_dryshot.ogg';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -14,6 +15,7 @@ class Game extends Phaser.Scene {
     this.load.image('sky', sky);
     this.load.image('ship', ship);
     this.load.image('ball', ball);
+    this.load.audio('bounceSound', bounceSound);
   }
 
   create() {
@@ -31,13 +33,13 @@ class Game extends Phaser.Scene {
     this.ball.setBounce(1);
     this.ball.setCircle(25);
 
-    // this.ball.setGravityY(100);
     this.ball.setVelocityX(250);
     this.ball.setVelocityY(250);
-    console.log(this.ball);
+
+    this.bounceSound = this.sound.add('bounceSound');
+
     this.physics.add.collider(this.ball, this.player, () => {
-      // this.ball.setVelocityX(-this.ball.body.velocity.x);
-      // this.ball.setVelocityY(-this.ball.body.velocity.y);
+      this.bounceSound.play();
     });
 
     // Create player animation
