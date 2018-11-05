@@ -19,6 +19,68 @@ class Game extends Phaser.Scene {
     return this.sys.game.config.height / 2;
   }
 
+  createShip() {
+    this.player = this.physics.add.sprite(50, this.centerY(), 'ship');
+    this.player.setScale(0.3, 0.3);
+    this.player.setCollideWorldBounds(true);
+    this.player.setImmovable(true);
+  }
+
+  createBall() {
+    this.ball = this.physics.add.sprite(250, 240, 'ball');
+    this.ball.setCircle(25);
+    this.ball.setScale(0.4, 0.4);
+
+    this.ball.setCollideWorldBounds(true);
+    this.ball.body.setAllowGravity(false);
+    this.ball.setBounce(1);
+  }
+
+  shootBall() {
+    this.ball.setVelocityX(300);
+    this.ball.setVelocityY(300);
+  }
+
+  ballHitPaddle() {
+    const diff = 0;
+    const paddleZones = {
+      farLeft: '',
+      middleLeft: '',
+      center: '',
+      middleRight: '',
+      farRight: '',
+    };
+
+    const distance = this.ball.y - this.player.y;
+    console.log(distance);
+
+    if (distance >= -10 && distance <= 10) {
+      console.log('center');
+    } else if (distance >= -30 && distance < -10) {
+      console.log('middleLeft');
+    } else if (distance >= -50 && distance < -30) {
+      console.log('farLeft');
+    } else if (distance > 10 && distance <= 30) {
+      console.log('middleRight');
+    } else if (distance > 30 && distance <= 50) {
+      console.log('farRight');
+    }
+
+    // if (this.ball.x < this.ship.x) {
+    //   //  Ball is on the left-hand side of the paddle
+    //   diff = _paddle.x - _ball.x;
+    //   _ball.body.velocity.x = (-10 * diff);
+    // } else if (_ball.x > _paddle.x) {
+    //   //  Ball is on the right-hand side of the paddle
+    //   diff = _ball.x - _paddle.x;
+    //   _ball.body.velocity.x = (10 * diff);
+    // } else {
+    //   //  Ball is perfectly in the middle
+    //   //  Add a little random X to stop it bouncing straight up!
+    //   _ball.body.velocity.x = 2 + Math.random() * 8;
+    // }
+  }
+
   preload() {
     this.load.image('sky', sky);
     this.load.image('ship', ship);
@@ -27,39 +89,19 @@ class Game extends Phaser.Scene {
   }
 
   create() {
-    this.physics.world.checkCollision.left = false;
-    // add Sky background sprit
     this.add.image(400, 300, 'sky');
-
-    // Create Player
-    this.player = this.physics.add.sprite(50, this.centerY(), 'ship');
-    this.player.setScale(0.3, 0.3);
-    this.player.setCollideWorldBounds(true);
-    this.player.setImmovable(true);
-
-    // Create ball
-    this.ball = this.physics.add.sprite(250, 240, 'ball');
-    // this.ball.body.setSize(10, 10);
-    this.ball.setScale(0.4, 0.4);
-
-
-    this.ball.setCollideWorldBounds(true);
-    this.ball.body.setAllowGravity(false);
-
-    // this.ball.setAcceleration(200, 200);
-    // this.ball.body.setDrag(5);
-
-    this.ball.setBounce(1);
-    this.ball.setCircle(25);
-
-    this.ball.setVelocityX(300);
-    this.ball.setVelocityY(300);
-
     this.bounceSound = this.sound.add('bounceSound');
 
+    this.physics.world.checkCollision.left = false;
+
+    this.createShip();
+    this.createBall();
+
+
     this.physics.add.collider(this.ball, this.player, () => {
-      // this.bounceSound.play();
-      this.ball.setVelocity(this.ball.body.velocity.x + 10, this.ball.body.velocity.y + 10);
+      this.bounceSound.play();
+      this.ballHitPaddle();
+      // this.ball.setVelocity(this.ball.body.velocity.x + 10, this.ball.body.velocity.y + 10);
     });
 
     // Create player animation
