@@ -97,11 +97,9 @@ class Game extends Phaser.Scene {
     this.createShip();
     this.createBall();
 
-
     this.physics.add.collider(this.ball, this.player, () => {
       this.bounceSound.play();
       this.ballHitPaddle();
-      // this.ball.setVelocity(this.ball.body.velocity.x + 10, this.ball.body.velocity.y + 10);
     });
 
     // Create player animation
