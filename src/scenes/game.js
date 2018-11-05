@@ -1,11 +1,5 @@
 import Phaser from 'phaser';
 
-// Assets
-import sky from '../assets/sky.png';
-import ship from '../assets/ship.png';
-import ball from '../assets/ball.png';
-import bounceSound from '../assets/crossbow_dryshot.ogg';
-
 class Game extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' });
@@ -54,6 +48,7 @@ class Game extends Phaser.Scene {
     const distance = this.ball.y - this.player.y;
     console.log(distance);
 
+    // TODO: calculate the distance based on sprite demensions instead of using fixed values
     if (distance >= -10 && distance <= 10) {
       console.log('center');
     } else if (distance >= -30 && distance < -10) {
