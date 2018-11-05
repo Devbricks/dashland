@@ -1,11 +1,5 @@
 import Phaser from 'phaser';
 
-// Assets
-import sky from '../assets/sky.png';
-import ship from '../assets/ship.png';
-import ball from '../assets/ball.png';
-import bounceSound from '../assets/crossbow_dryshot.ogg';
-
 class Game extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' });
@@ -17,13 +11,6 @@ class Game extends Phaser.Scene {
 
   centerY() {
     return this.sys.game.config.height / 2;
-  }
-
-  preload() {
-    this.load.image('sky', sky);
-    this.load.image('ship', ship);
-    this.load.image('ball', ball);
-    this.load.audio('bounceSound', bounceSound);
   }
 
   create() {
