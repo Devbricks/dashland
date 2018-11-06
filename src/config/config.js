@@ -9,8 +9,10 @@ const config = {
   type: Phaser.AUTO,
   width: constants.WIDTH,
   height: constants.HEIGHT,
-  canvas: document.querySelector('#dashland-canvas'),
   antialias: true,
+  autoResize: false,
+  resolution: 4,
+  canvas: document.querySelector('#dashland-canvas'),
   physics: {
     default: 'arcade',
     arcade: {

@@ -18,10 +18,12 @@ class Game extends Phaser.Scene {
     this.player.setScale(0.3, 0.3);
     this.player.setCollideWorldBounds(true);
     this.player.setImmovable(true);
+    this.player.body.maxVelocity.y = 500;
   }
 
   createBall() {
-    this.ball = this.physics.add.sprite(250, 240, 'ball');
+    this.onPaddle = true;
+    this.ball = this.physics.add.sprite(90, this.centerY(), 'ball');
     this.ball.setCircle(25);
     this.ball.setScale(0.4, 0.4);
 
@@ -31,6 +33,7 @@ class Game extends Phaser.Scene {
   }
 
   shootBall() {
+    this.onPaddle = false;
     this.ball.setVelocityX(300);
     this.ball.setVelocityY(300);
   }
@@ -50,15 +53,16 @@ class Game extends Phaser.Scene {
 
     // TODO: calculate the distance based on sprite demensions instead of using fixed values
     if (distance >= -10 && distance <= 10) {
-      console.log('center');
+      this.ball.setVelocityX(this.ball.body.velocity.x + 20);
+      this.ball.setVelocityY(this.ball.body.velocity.y + 20);
     } else if (distance >= -30 && distance < -10) {
-      console.log('middleLeft');
+      this.ball.setVelocityX(this.ball.body.velocity.x + 10);
     } else if (distance >= -50 && distance < -30) {
-      console.log('farLeft');
+      this.ball.setVelocityX(this.ball.body.velocity.x + 5);
     } else if (distance > 10 && distance <= 30) {
-      console.log('middleRight');
+      this.ball.setVelocityX(this.ball.body.velocity.x - 5);
     } else if (distance > 30 && distance <= 50) {
-      console.log('farRight');
+      this.ball.setVelocityX(this.ball.body.velocity.x - 10);
     }
 
     // if (this.ball.x < this.ship.x) {
@@ -77,10 +81,7 @@ class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('sky', sky);
-    this.load.image('ship', ship);
-    this.load.image('ball', ball);
-    this.load.audio('bounceSound', bounceSound);
+    // empty for now
   }
 
   create() {
@@ -96,6 +97,20 @@ class Game extends Phaser.Scene {
       this.bounceSound.play();
       this.ballHitPaddle();
     });
+
+    this.input.keyboard.on('keyup_SPACE', this.shootBall, this);
+
+    this.cursors = this.input.keyboard.createCursorKeys();
+
+    // this.input.keyboard.on('keyup_DOWN', () => {
+    //   console.log('down');
+    //   this.player.body.velocity.y += 100;
+    // }, this);
+
+    // this.input.keyboard.on('keyup_UP', () => {
+    //   console.log('up');
+    //   this.player.body.acceleration.y -= 100;
+    // }, this);
 
     // Create player animation
     // this.anims.create({
@@ -123,13 +138,18 @@ class Game extends Phaser.Scene {
   }
 
   update() {
+    if (this.onPaddle) {
+      this.ball.y = this.player.y;
+    }
     // Create movement controller
     this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.up.isDown) {
       this.player.setVelocityY(-320);
+      // this.player.body.acceleration.y -= 10;
       // this.player.anims.play('left', true);
     } else if (this.cursors.down.isDown) {
       this.player.setVelocityY(320);
+      // this.player.body.acceleration.y += 10;
       // this.player.anims.play('right', true);
     } else {
       this.player.setVelocityY(0);

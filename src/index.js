@@ -18,6 +18,7 @@ import './styles/global.css';
 class DashLand extends Phaser.Game {
   constructor() {
     super(config);
+
     this.scene.add('Game', GameScene);
     this.scene.add('Boot', BootScene);
     this.scene.add('Splashscreen', SplashScreenScene);
@@ -25,6 +26,7 @@ class DashLand extends Phaser.Game {
     this.scene.add('Options', OptionsScene);
     this.scene.add('Tutorial', TutorialScene);
     this.scene.add('Credits', CreditsScene);
+
     this.scene.start('Boot');
   }
 }
