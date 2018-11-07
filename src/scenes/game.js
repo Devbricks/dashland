@@ -39,17 +39,7 @@ class Game extends Phaser.Scene {
   }
 
   ballHitPaddle() {
-    const diff = 0;
-    const paddleZones = {
-      farLeft: '',
-      middleLeft: '',
-      center: '',
-      middleRight: '',
-      farRight: '',
-    };
-
     const distance = this.ball.y - this.player.y;
-    console.log(distance);
 
     // TODO: calculate the distance based on sprite demensions instead of using fixed values
     if (distance >= -10 && distance <= 10) {
@@ -64,20 +54,6 @@ class Game extends Phaser.Scene {
     } else if (distance > 30 && distance <= 50) {
       this.ball.setVelocityX(this.ball.body.velocity.x - 10);
     }
-
-    // if (this.ball.x < this.ship.x) {
-    //   //  Ball is on the left-hand side of the paddle
-    //   diff = _paddle.x - _ball.x;
-    //   _ball.body.velocity.x = (-10 * diff);
-    // } else if (_ball.x > _paddle.x) {
-    //   //  Ball is on the right-hand side of the paddle
-    //   diff = _ball.x - _paddle.x;
-    //   _ball.body.velocity.x = (10 * diff);
-    // } else {
-    //   //  Ball is perfectly in the middle
-    //   //  Add a little random X to stop it bouncing straight up!
-    //   _ball.body.velocity.x = 2 + Math.random() * 8;
-    // }
   }
 
   preload() {
@@ -99,6 +75,20 @@ class Game extends Phaser.Scene {
     });
 
     this.input.keyboard.on('keyup_SPACE', this.shootBall, this);
+    this.input.on('pointerdown', this.shootBall, this);
+
+    // this.input.on('pointerdown', () => {
+    //   this.moveDown = true;
+    // }, this);
+
+    // this.input.on('pointerup', () => {
+    //   this.moveUp = true;
+    // }, this);
+
+    // this.input.on('touchend', () => {
+    //   this.moveDown = false;
+    //   this.moveUp = false;
+    // });
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -138,16 +128,18 @@ class Game extends Phaser.Scene {
   }
 
   update() {
+    console.log(this.input.mousePointer.movementY);
+
     if (this.onPaddle) {
       this.ball.y = this.player.y;
     }
     // Create movement controller
     this.cursors = this.input.keyboard.createCursorKeys();
-    if (this.cursors.up.isDown) {
+    if (this.cursors.up.isDown || this.moveDown) {
       this.player.setVelocityY(-320);
       // this.player.body.acceleration.y -= 10;
       // this.player.anims.play('left', true);
-    } else if (this.cursors.down.isDown) {
+    } else if (this.cursors.down.isDown || this.moveUp) {
       this.player.setVelocityY(320);
       // this.player.body.acceleration.y += 10;
       // this.player.anims.play('right', true);
