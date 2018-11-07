@@ -14,7 +14,8 @@ class Splashscreen extends Phaser.Scene {
     const { width } = this.cameras.main;
     const { height } = this.cameras.main;
 
-    this.add.image(width / 2, 200, 'ship');
+    this.ship = this.add.image(width / 2, 200, 'ship');
+    this.ship.setAngle(-90);
 
     // display progress bar
     const progressBar = this.add.graphics();
@@ -68,6 +69,7 @@ class Splashscreen extends Phaser.Scene {
 
     this.load.image('sky', sky);
     this.load.image('ball', ball);
+
     this.load.audio('bounceSound', bounceSound);
   }
 
