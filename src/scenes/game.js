@@ -14,9 +14,10 @@ class Game extends Phaser.Scene {
   }
 
   create() {
+    const { width, height } = this.sys.canvas;
     this.physics.world.checkCollision.left = false;
     // add Sky background sprit
-    this.add.image(400, 300, 'sky');
+    this.add.image(0, 0, 'sky').setOrigin(0, 0).setDisplaySize(width, height);
 
     // Create Player
     this.player = this.physics.add.sprite(50, this.centerY(), 'ship');
