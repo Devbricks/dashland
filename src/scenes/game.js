@@ -61,7 +61,9 @@ class Game extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 300, 'sky');
+    const { width, height } = this.sys.canvas;
+    // add Sky background sprit
+    this.add.image(0, 0, 'sky').setOrigin(0, 0).setDisplaySize(width, height);
     this.bounceSound = this.sound.add('bounceSound');
 
     this.physics.world.checkCollision.left = false;
@@ -128,8 +130,6 @@ class Game extends Phaser.Scene {
   }
 
   update() {
-    console.log(this.input.mousePointer.movementY);
-
     if (this.onPaddle) {
       this.ball.y = this.player.y;
     }
