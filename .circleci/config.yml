@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.10
+
+    working_directory: ~/repo
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "64:88:f6:75:08:14:7c:53:2a:90:52:a9:57:32:f8:bd"
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run build
+      - run: yarn build
+
+      # copy built files to server
+      - run: ssh -o "StrictHostKeyChecking no" m1520n@151.80.57.222 -p 122 "rm -rf /var/www/dashland/* && exit"
+      - run: scp -P 122 ./dist/* m1520n@151.80.57.222:/var/www/dashland
+
+
+
+
