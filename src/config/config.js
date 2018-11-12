@@ -4,14 +4,16 @@ import Phaser from 'phaser';
 import 'phaser-plugin-game-scale';
 
 // import constants from './constants';
-
+console.log(window.devicePixelRatio);
+console.log(window.innerWidth);
+console.log(window.innerHeight);
 const config = {
   type: Phaser.AUTO,
-  width: (window.innerWidth * window.devicePixelRatio) / 4,
-  height: (window.innerHeight * window.devicePixelRatio) / 4,
+  width: window.innerWidth,
+  height: window.innerHeight,
   antialias: true,
   autoResize: false,
-  resolution: 4,
+  resolution: window.devicePixelRatio,
   canvas: document.querySelector('#dashland-canvas'),
   physics: {
     default: 'arcade',
