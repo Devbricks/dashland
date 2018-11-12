@@ -7,8 +7,8 @@ import 'phaser-plugin-game-scale';
 
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth * window.devicePixelRatio,
-  height: window.innerHeight * window.devicePixelRatio,
+  width: (window.innerWidth * window.devicePixelRatio) / 4,
+  height: (window.innerHeight * window.devicePixelRatio) / 4,
   antialias: true,
   autoResize: false,
   resolution: 4,
