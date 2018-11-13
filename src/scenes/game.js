@@ -65,7 +65,7 @@ class Game extends Phaser.Scene {
   create() {
     const { width, height } = this.sys.canvas;
     // add Sky background sprit
-    this.add.image(0, 0, 'track').setOrigin(0, 0).setDisplaySize(width, height);
+    this.add.image(0, 0, 'track').setOrigin(0, 0).setDisplaySize(width / window.devicePixelRatio, height / window.devicePixelRatio);
     this.bounceSound = this.sound.add('bounceSound');
 
     this.physics.world.checkCollision.left = false;
@@ -138,11 +138,11 @@ class Game extends Phaser.Scene {
     // Create movement controller
     this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.up.isDown || this.moveDown) {
-      this.player.setVelocityY(-320);
+      this.player.setVelocityY(-320 * window.devicePixelRatio);
       // this.player.body.acceleration.y -= 10;
       // this.player.anims.play('left', true);
     } else if (this.cursors.down.isDown || this.moveUp) {
-      this.player.setVelocityY(320);
+      this.player.setVelocityY(320 * window.devicePixelRatio);
       // this.player.body.acceleration.y += 10;
       // this.player.anims.play('right', true);
     } else {
