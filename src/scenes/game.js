@@ -33,9 +33,11 @@ class Game extends Phaser.Scene {
   }
 
   shootBall() {
-    this.onPaddle = false;
-    this.ball.setVelocityX(300);
-    this.ball.setVelocityY(300);
+    if (this.onPaddle) {
+      this.onPaddle = false;
+      this.ball.setVelocityX(300 * window.devicePixelRatio);
+      this.ball.setVelocityY(300 * window.devicePixelRatio);
+    }
   }
 
   ballHitPaddle() {
@@ -43,16 +45,16 @@ class Game extends Phaser.Scene {
 
     // TODO: calculate the distance based on sprite demensions instead of using fixed values
     if (distance >= -10 && distance <= 10) {
-      this.ball.setVelocityX(this.ball.body.velocity.x + 20);
-      this.ball.setVelocityY(this.ball.body.velocity.y + 20);
+      this.ball.setVelocityX(this.ball.body.velocity.x + (20 * window.devicePixelRatio));
+      this.ball.setVelocityY(this.ball.body.velocity.y + (20 * window.devicePixelRatio));
     } else if (distance >= -30 && distance < -10) {
-      this.ball.setVelocityX(this.ball.body.velocity.x + 10);
+      this.ball.setVelocityX(this.ball.body.velocity.x + (10 * window.devicePixelRatio));
     } else if (distance >= -50 && distance < -30) {
-      this.ball.setVelocityX(this.ball.body.velocity.x + 5);
+      this.ball.setVelocityX(this.ball.body.velocity.x + (5 * window.devicePixelRatio));
     } else if (distance > 10 && distance <= 30) {
-      this.ball.setVelocityX(this.ball.body.velocity.x - 5);
+      this.ball.setVelocityX(this.ball.body.velocity.x - (5 * window.devicePixelRatio));
     } else if (distance > 30 && distance <= 50) {
-      this.ball.setVelocityX(this.ball.body.velocity.x - 10);
+      this.ball.setVelocityX(this.ball.body.velocity.x - (10 * window.devicePixelRatio));
     }
   }
 

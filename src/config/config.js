@@ -4,9 +4,7 @@ import Phaser from 'phaser';
 import 'phaser-plugin-game-scale';
 
 // import constants from './constants';
-console.log(window.devicePixelRatio);
-console.log(window.innerWidth);
-console.log(window.innerHeight);
+
 const config = {
   type: Phaser.AUTO,
   width: window.innerWidth,
