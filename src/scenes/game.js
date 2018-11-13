@@ -15,7 +15,7 @@ class Game extends Phaser.Scene {
 
   createShip() {
     this.player = this.physics.add.sprite(50, this.centerY(), 'ship');
-    this.player.setScale(0.3, 0.3);
+    this.player.setScale(1 / window.devicePixelRatio, 1 / window.devicePixelRatio);
     this.player.setCollideWorldBounds(true);
     this.player.setImmovable(true);
     this.player.body.maxVelocity.y = 500;
@@ -23,7 +23,7 @@ class Game extends Phaser.Scene {
 
   createBall() {
     this.onPaddle = true;
-    this.ball = this.physics.add.sprite(90, this.centerY(), 'ball');
+    this.ball = this.physics.add.sprite(100, this.centerY(), 'ball');
     this.ball.setCircle(25);
     this.ball.setScale(0.4, 0.4);
 
