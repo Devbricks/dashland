@@ -7,11 +7,11 @@ import 'phaser-plugin-game-scale';
 
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth * window.devicePixelRatio,
-  height: window.innerHeight * window.devicePixelRatio,
+  width: window.innerWidth,
+  height: window.innerHeight,
   antialias: true,
   autoResize: false,
-  resolution: 4,
+  resolution: window.devicePixelRatio,
   canvas: document.querySelector('#dashland-canvas'),
   physics: {
     default: 'arcade',
