@@ -14,7 +14,7 @@ class Game extends Phaser.Scene {
   }
 
   createShip() {
-    this.player = this.physics.add.sprite(50, this.centerY(), 'ship');
+    this.player = this.physics.add.sprite(50 * window.devicePixelRatio, this.centerY(), 'ship');
     this.player.setScale(1 / window.devicePixelRatio, 1 / window.devicePixelRatio);
     this.player.setCollideWorldBounds(true);
     this.player.setImmovable(true);
