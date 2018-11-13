@@ -7,6 +7,7 @@ import 'phaser-plugin-game-scale';
 console.log(window.devicePixelRatio);
 console.log(window.innerWidth);
 console.log(window.innerHeight);
+
 const config = {
   type: Phaser.AUTO,
   width: window.innerWidth,
