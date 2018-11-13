@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 // Assets
-import sky from '../assets/sky.png';
+import track from '../assets/standard-track.png';
 import ball from '../assets/ball.png';
 import bounceSound from '../assets/crossbow_dryshot.ogg';
 
@@ -67,7 +67,7 @@ class Splashscreen extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(3000, this.startGame, [], this);
 
-    this.load.image('sky', sky);
+    this.load.image('track', track);
     this.load.image('ball', ball);
 
     this.load.audio('bounceSound', bounceSound);
