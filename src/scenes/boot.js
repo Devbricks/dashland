@@ -1,10 +1,7 @@
 import Phaser from 'phaser';
 
 // Assets
-import ship from '../assets/ship.png';
-import sky from '../assets/sky.png';
-import ball from '../assets/ball.png';
-import bounceSound from '../assets/crossbow_dryshot.ogg';
+import ship from '../assets/images/ship.png';
 
 class Boot extends Phaser.Scene {
   constructor() {

@@ -58,10 +58,6 @@ class Game extends Phaser.Scene {
     }
   }
 
-  preload() {
-    // empty for now
-  }
-
   create() {
     const { width, height } = this.sys.canvas;
     // add Sky background sprit

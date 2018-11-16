@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 
 // Assets
-import track from '../assets/standard-track.png';
-import ball from '../assets/ball.png';
-import bounceSound from '../assets/crossbow_dryshot.ogg';
+import track from '../assets/images/standard-track.png';
+import ball from '../assets/images/ball.png';
+import bounceSound from '../assets/sounds/crossbow_dryshot.ogg';
 
 class Splashscreen extends Phaser.Scene {
   constructor() {
