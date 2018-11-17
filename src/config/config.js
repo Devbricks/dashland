@@ -3,8 +3,6 @@ import Phaser from 'phaser';
 // Plugins
 import 'phaser-plugin-game-scale';
 
-// import constants from './constants';
-
 const config = {
   type: Phaser.AUTO,
   width: window.innerWidth,

@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
 
+// Sprites
+import Player from '../sprites/player/player';
+
 class Game extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' });
@@ -14,11 +17,7 @@ class Game extends Phaser.Scene {
   }
 
   createShip() {
-    this.player = this.physics.add.sprite(100 / window.devicePixelRatio, this.centerY(), 'ship');
-    this.player.setScale(1 / window.devicePixelRatio, 1 / window.devicePixelRatio);
-    this.player.setCollideWorldBounds(true);
-    this.player.setImmovable(true);
-    this.player.body.maxVelocity.y = 500;
+    this.player = new Player(this, 100 / window.devicePixelRatio, this.centerY(), 'ship');
   }
 
   createBall() {
@@ -58,6 +57,10 @@ class Game extends Phaser.Scene {
     }
   }
 
+  preload() {
+    this.createShip();
+  }
+
   create() {
     const { width, height } = this.sys.canvas;
     // add Sky background sprit
@@ -65,8 +68,7 @@ class Game extends Phaser.Scene {
     this.bounceSound = this.sound.add('bounceSound');
 
     this.physics.world.checkCollision.left = false;
-
-    this.createShip();
+    this.player.create();
     this.createBall();
 
     this.physics.add.collider(this.ball, this.player, () => {

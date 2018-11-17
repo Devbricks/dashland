@@ -11,6 +11,10 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     "no-underscore-dangle": "off",
     "no-return-assign": ["error", "except-parens"],
+    "object-curly-newline": ["error", {
+      "ObjectExpression": {"consistent": true},
+      "ObjectPattern": {"consistent": true}
+    }],
   },
   plugins: ["import"]
 };
