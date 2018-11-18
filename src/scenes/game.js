@@ -63,12 +63,13 @@ class Game extends Phaser.Scene {
 
   create() {
     const { width, height } = this.sys.canvas;
+    this.cursors = this.input.keyboard.createCursorKeys();
     // add Sky background sprit
     this.add.image(0, 0, 'track').setOrigin(0, 0).setDisplaySize(width / window.devicePixelRatio, height / window.devicePixelRatio);
     this.bounceSound = this.sound.add('bounceSound');
 
     this.physics.world.checkCollision.left = false;
-    this.player.create();
+    this.player.create(this.cursors);
     this.createBall();
 
     this.physics.add.collider(this.ball, this.player, () => {
@@ -91,8 +92,6 @@ class Game extends Phaser.Scene {
     //   this.moveDown = false;
     //   this.moveUp = false;
     // });
-
-    this.cursors = this.input.keyboard.createCursorKeys();
 
     // this.input.keyboard.on('keyup_DOWN', () => {
     //   console.log('down');
@@ -133,24 +132,9 @@ class Game extends Phaser.Scene {
     if (this.onPaddle) {
       this.ball.y = this.player.y;
     }
-    // Create movement controller
-    this.cursors = this.input.keyboard.createCursorKeys();
-    if (this.cursors.up.isDown || this.moveDown) {
-      this.player.setVelocityY(-320 * window.devicePixelRatio);
-      // this.player.body.acceleration.y -= 10;
-      // this.player.anims.play('left', true);
-    } else if (this.cursors.down.isDown || this.moveUp) {
-      this.player.setVelocityY(320 * window.devicePixelRatio);
-      // this.player.body.acceleration.y += 10;
-      // this.player.anims.play('right', true);
-    } else {
-      this.player.setVelocityY(0);
-      // this.player.anims.play('turn');
-    }
 
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-450);
-    }
+    // player movement and other logic
+    this.player.update();
   }
 }
 
