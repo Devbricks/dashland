@@ -17,7 +17,7 @@ class Game extends Phaser.Scene {
   }
 
   createShip() {
-    this.player = new Player(this, 100 / window.devicePixelRatio, this.centerY(), 'ship');
+    this.player = new Player(this, 100, this.centerY(), 'ship');
   }
 
   createBall() {
