@@ -24,7 +24,7 @@ class Game extends Phaser.Scene {
     this.onPaddle = true;
     this.ball = this.physics.add.sprite(225 / window.devicePixelRatio, this.centerY(), 'ball');
     this.ball.setCircle(25 / window.devicePixelRatio);
-    this.ball.setScale(1 / window.devicePixelRatio, 1 / window.devicePixelRatio);
+    this.ball.setScale(window.devicePixelRatio / 3, window.devicePixelRatio / 3);
 
     this.ball.setCollideWorldBounds(true);
     this.ball.body.setAllowGravity(false);

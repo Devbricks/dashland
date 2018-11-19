@@ -16,7 +16,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   create(cursors) {
     const { scene } = this;
     scene.physics.world.enable(this);
-    this.setScale(1 / window.devicePixelRatio, 1 / window.devicePixelRatio);
+    this.setScale(window.devicePixelRatio / 3, window.devicePixelRatio / 3);
     this.setCollideWorldBounds(true);
     this.setImmovable(true);
     this.setMaxVelocity(MAX_SPEED);
