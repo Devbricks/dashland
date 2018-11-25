@@ -17,7 +17,7 @@ class Game extends Phaser.Scene {
   }
 
   createShip() {
-    this.player = new Player(this, 100, this.centerY(), 'ship');
+    this.player = new Player(this, 100 * window.devicePixelRatio, this.centerY(), 'ship');
   }
 
   createBall() {
@@ -63,6 +63,9 @@ class Game extends Phaser.Scene {
 
   create() {
     const { width, height } = this.sys.canvas;
+    // This will prevent pixels from being drawn at half coordinates
+    this.cameras.main.setRoundPixels(true);
+
     this.cursors = this.input.keyboard.createCursorKeys();
     // add Sky background sprit
     this.add.image(0, 0, 'track').setOrigin(0, 0).setDisplaySize(width / window.devicePixelRatio, height / window.devicePixelRatio);

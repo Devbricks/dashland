@@ -7,6 +7,7 @@ const MASS = 1;
 const BOUNCE = 0.75;
 const FRICTION = 0.1;
 const GRAVITY = 0;
+
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, texture) {
     super(scene, x, y, texture);
@@ -16,7 +17,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   create(cursors) {
     const { scene } = this;
     scene.physics.world.enable(this);
-    // this.setScale(window.devicePixelRatio / 3, window.devicePixelRatio / 3);
     this.setCollideWorldBounds(true);
     this.setImmovable(true);
     this.setMaxVelocity(MAX_SPEED);

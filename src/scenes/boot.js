@@ -2,6 +2,12 @@ import Phaser from 'phaser';
 
 // Assets
 import ship from '../assets/images/ship.png';
+import ship2 from '../assets/images/ship2.png';
+
+const imageArray = {
+  1: ship,
+  2: ship2,
+};
 
 class Boot extends Phaser.Scene {
   constructor() {
@@ -9,8 +15,8 @@ class Boot extends Phaser.Scene {
   }
 
   preload() {
-    // we will preload splashscreen here
-    this.load.image('ship', ship);
+    const ratio = window.devicePixelRatio > 2 ? 2 : window.devicePixelRatio;
+    this.load.image('ship', imageArray[ratio]);
   }
 
   create() {
